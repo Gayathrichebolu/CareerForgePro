@@ -119,10 +119,10 @@ function Dashboard({
   };
 
   const listCardClass = (item) =>
-    `rounded-[1.75rem] border p-5 transition-all duration-300 cursor-pointer ${
+    `rounded-[1.75rem] border p-5 transition-all duration-300 cursor-pointer transform-gpu will-change-transform ${
       selectedItem?.id === item.id
-        ? "bg-violet-50 dark:bg-violet-900/20 border-violet-300 dark:border-violet-700 shadow-lg"
-        : "bg-white/90 dark:bg-gray-800/90 border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-lg hover:-translate-y-1"
+        ? "bg-violet-50 dark:bg-violet-900/20 border-violet-300 dark:border-violet-700 shadow-2xl scale-[1.01]"
+        : "bg-white/90 dark:bg-gray-800/90 border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.01] hover:ring-1 hover:ring-violet-100/40"
     }`;
 
   const allItems = [
@@ -470,7 +470,7 @@ function Dashboard({
 
         {/* Clean Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-          <div className="rounded-[1.75rem] bg-white/90 dark:bg-gray-900/80 border border-white dark:border-gray-700 p-6 shadow-lg">
+          <div className="rounded-[1.75rem] glass-card p-6">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gray-500 dark:text-gray-400">
               Total Assets
             </p>
@@ -481,20 +481,54 @@ function Dashboard({
               <span className="text-3xl">📚</span>
             </div>
           </div>
-
-          <div className="rounded-[1.75rem] bg-white/90 dark:bg-gray-900/80 border border-white dark:border-gray-700 p-6 shadow-lg">
+          <div className="rounded-[1.75rem] glass-card p-6 flex items-center justify-between">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gray-500 dark:text-gray-400">
               Average ATS Score
             </p>
-            <div className="mt-4 flex items-end justify-between">
-              <h2 className="text-5xl font-black text-violet-600 dark:text-violet-300">
-                {avgAtsScore}%
-              </h2>
-              <span className="text-3xl">📊</span>
+            <div className="mt-2 flex items-center gap-4">
+              <div className="ats-ring">
+                {/** SVG progress ring */}
+                {(() => {
+                  const radius = 36;
+                  const circumference = 2 * Math.PI * radius;
+                  const pct = Math.max(0, Math.min(100, avgAtsScore));
+                  const offset = circumference - (pct / 100) * circumference;
+                  return (
+                    <svg width="88" height="88" viewBox="0 0 88 88">
+                      <defs>
+                        <linearGradient id="g1" x1="0%" x2="100%">
+                          <stop offset="0%" stopColor="#7c3aed" />
+                          <stop offset="50%" stopColor="#ec4899" />
+                          <stop offset="100%" stopColor="#f97316" />
+                        </linearGradient>
+                      </defs>
+                      <g transform="translate(44,44)">
+                        <circle r={radius} fill="transparent" stroke="rgba(0,0,0,0.06)" strokeWidth="8" />
+                        <circle
+                          r={radius}
+                          fill="transparent"
+                          stroke="url(#g1)"
+                          strokeWidth="8"
+                          strokeLinecap="round"
+                          strokeDasharray={circumference}
+                          strokeDashoffset={offset}
+                          transform="rotate(-90)"
+                        />
+                        <text x="0" y="6" textAnchor="middle" fontSize="18" fontWeight="700" fill="#111827">
+                          {pct}%
+                        </text>
+                      </g>
+                    </svg>
+                  );
+                })()}
+              </div>
+              <div className="ml-2">
+                <h2 className="text-3xl font-black text-violet-600 dark:text-violet-300">{avgAtsScore}%</h2>
+                <p className="text-sm text-gray-500 mt-1">Avg. performance vs ATS benchmarks</p>
+              </div>
             </div>
           </div>
-
-          <div className="rounded-[1.75rem] bg-white/90 dark:bg-gray-900/80 border border-white dark:border-gray-700 p-6 shadow-lg">
+          <div className="rounded-[1.75rem] glass-card p-6">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gray-500 dark:text-gray-400">
               Main Tools
             </p>
@@ -513,32 +547,41 @@ function Dashboard({
 
         {/* Tabs */}
         <div className="mb-8 overflow-x-auto pb-2">
-          <div className="flex gap-3 min-w-max rounded-[1.75rem] bg-white/85 dark:bg-gray-900/80 p-3 border border-white dark:border-gray-700 shadow-md">
+          <div className="relative flex gap-3 min-w-max rounded-[1.75rem] p-3 border bg-white/85 dark:bg-gray-900/80 border-white dark:border-gray-700 shadow-md">
             {tabs.map((tab) => (
-              <button
+              <motion.button
                 key={tab.id}
                 onClick={() => {
                   setActiveTab(tab.id);
                   setSelectedItem(null);
                 }}
-                className={`flex items-center gap-3 rounded-2xl px-5 py-3 font-bold transition-all ${
+                whileTap={{ scale: 0.98 }}
+                className={`relative flex items-center gap-3 rounded-2xl px-5 py-3 font-bold transition-all overflow-hidden ${
                   activeTab === tab.id
-                    ? "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-lg"
-                    : "text-gray-600 dark:text-gray-300 hover:bg-violet-50 dark:hover:bg-gray-800"
+                    ? "text-white"
+                    : "text-gray-600 dark:text-gray-300"
                 }`}
               >
-                <span>{tab.icon}</span>
-                <span>{tab.label}</span>
+                {activeTab === tab.id && (
+                  <motion.span
+                    layoutId="tabActive"
+                    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-500 shadow-lg"
+                    style={{ zIndex: 0 }}
+                  />
+                )}
+                <span style={{ zIndex: 10 }}>{tab.icon}</span>
+                <span style={{ zIndex: 10 }}>{tab.label}</span>
                 <span
                   className={`rounded-full px-2.5 py-0.5 text-xs ${
                     activeTab === tab.id
                       ? "bg-white/20 text-white"
                       : "bg-violet-100 dark:bg-violet-900/20 text-violet-700 dark:text-violet-300"
                   }`}
+                  style={{ zIndex: 10 }}
                 >
                   {tab.count}
                 </span>
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
