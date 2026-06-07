@@ -107,20 +107,23 @@ function ResumeForm({
   };
 
   const inputClass =
-    "w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 p-3 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 dark:focus:ring-violet-400 transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 shadow-sm text-sm";
+    "w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 p-3 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:focus:ring-sky-400 transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 shadow-sm text-sm";
 
   const textareaClass = `${inputClass} resize-vertical h-24`;
 
   return (
     <div className="bg-white/90 dark:bg-gray-800/90 rounded-3xl p-6 shadow-md hover:shadow-xl transition-all duration-300 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
-      <h2 className="text-xl font-bold mb-5 text-gray-900 dark:text-white">
+      <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
         Resume Details
       </h2>
+      <p className="text-sm text-gray-600 dark:text-gray-300 mb-5 italic">
+        Professionally improved by CareerForge AI
+      </p>
 
       <div className="space-y-3">
         {mode === "improve" && (
           <div className="space-y-3">
-            <div className="rounded-3xl border border-violet-200/70 dark:border-violet-700/50 bg-violet-50/80 dark:bg-violet-900/20 p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-200/70 dark:border-slate-700/50 bg-slate-50/80 dark:bg-slate-900/20 p-5 shadow-sm">
               <p className="text-sm text-gray-700 dark:text-gray-200 mb-3">
                 Paste your full resume below and CareerForge AI will extract and
                 improve all fields automatically.
@@ -136,7 +139,7 @@ function ResumeForm({
                 type="button"
                 onClick={handleImproveResume}
                 disabled={extracting}
-                className="mt-3 w-full rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white px-4 py-2.5 text-sm font-semibold hover:from-violet-700 hover:to-fuchsia-600 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="mt-3 w-full rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 text-white px-4 py-2.5 text-sm font-semibold hover:from-sky-700 hover:to-sky-800 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {extracting ? (
                   <>
@@ -164,7 +167,7 @@ function ResumeForm({
                 ) : extracted ? (
                   "✅ Improved! Paste again to re-improve"
                 ) : (
-                  "✨ AI Improve Resume"
+                    "✨ Professionally Improve Resume"
                 )}
               </button>
             </div>
@@ -218,7 +221,7 @@ function ResumeForm({
                 setResumeData({ ...resumeData, profilePic: imageURL });
               }
             }}
-            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 p-2.5 rounded-xl text-gray-900 dark:text-white text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 dark:file:bg-violet-900/40 dark:file:text-violet-300 cursor-pointer"
+            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 p-2.5 rounded-xl text-gray-900 dark:text-white text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100 dark:file:bg-sky-900/40 dark:file:text-sky-300 cursor-pointer"
           />
         </div>
 
@@ -345,11 +348,11 @@ function ResumeForm({
                 type="button"
                 onClick={() => handleAIImprove(name, resumeData[name])}
                 disabled={improvingField === name}
-                className="mt-2 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 text-sm font-semibold hover:from-emerald-600 hover:to-teal-600 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+                className="mt-2 w-full rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 text-white px-4 py-2 text-sm font-semibold hover:from-sky-600 hover:to-sky-700 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {improvingField === name
                   ? "Improving with AI..."
-                  : `✨ AI Improve ${label}`}
+                  : `✨ Professionally Improve ${label}`}
               </button>
             )}
           </div>
@@ -359,7 +362,7 @@ function ResumeForm({
           <button
             type="button"
             onClick={handleDownloadClick}
-            className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-500 hover:from-violet-700 hover:to-fuchsia-600 text-white px-6 py-3.5 rounded-xl font-semibold hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-md text-sm"
+            className="w-full bg-gradient-to-r from-sky-600 to-sky-700 hover:from-sky-700 hover:to-sky-800 text-white px-6 py-3.5 rounded-xl font-semibold hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-md text-sm"
           >
             📄{" "}
             {resumeData.template === "template4" && !isPro
@@ -373,7 +376,7 @@ function ResumeForm({
             <button
               type="button"
               onClick={handleDownloadWord}
-              className="w-full border border-violet-200 dark:border-violet-700 bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-300 px-6 py-3.5 rounded-xl font-semibold hover:bg-violet-100 dark:hover:bg-violet-900/30 transition-all duration-300 text-sm"
+              className="w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/20 text-sky-700 dark:text-sky-300 px-6 py-3.5 rounded-xl font-semibold hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-all duration-300 text-sm"
             >
               📝 Download Resume as Word
             </button>
