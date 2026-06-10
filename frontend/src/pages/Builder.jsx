@@ -25,33 +25,30 @@ const steps = [
   },
   {
     title: "Improve Resume",
-    desc: "AI rewrites your content",
-    icon: "✨",
-    gradient: "from-amber-500 to-orange-500",
+    return (
+      <motion.div
+        className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 transition-all duration-300 text-slate-200"
     bg: "from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20",
     border: "border-amber-200 dark:border-amber-700/50",
     page: "improve-resume",
-    pro: true,
-  },
-  {
+        <Navbar onBack={() => setCurrentPage("home")} showBack />
+
+        <div className="px-4 sm:px-10 py-12">
     title: "Check ATS Score",
     desc: "See how well your resume matches",
     icon: "📊",
     gradient: "from-emerald-500 to-teal-500",
     bg: "from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20",
     border: "border-emerald-200 dark:border-emerald-700/50",
-    page: "ats-score",
-    pro: false,
-  },
-  {
-    title: "Generate Cover Letter",
-    desc: "Create a matching cover letter",
-    icon: "💌",
-    gradient: "from-pink-500 to-rose-500",
-    bg: "from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20",
-    border: "border-pink-200 dark:border-pink-700/50",
-    page: "cover-letter",
-    pro: true,
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/6 text-purple-300 text-sm font-medium mb-4">
+              Workspace
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 leading-tight">
+              CareerForge <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-fuchsia-300">Workspace</span>
+            </h1>
+            <p className="text-slate-300 text-lg max-w-xl mx-auto">
+              Build your career documents step by step with polished tools and AI assistance
+            </p>
   },
   {
     title: "Upgrade to Pro",
@@ -65,19 +62,19 @@ const steps = [
   {
     title: "My Dashboard",
     desc: "View and manage saved resumes",
-    icon: "🗂️",
+                className={`cursor-pointer rounded-3xl p-6 sm:p-7 shadow-2xl transition-all duration-300 group relative overflow-hidden ${step.pro && !isPro ? 'opacity-70' : 'bg-gradient-to-br from-white/3 to-white/2'}`}
     gradient: "from-indigo-500 to-violet-500",
     bg: "from-indigo-50 to-violet-50 dark:from-indigo-900/20 dark:to-violet-900/20",
     border: "border-indigo-200 dark:border-indigo-700/50",
     page: "dashboard",
   },
 ];
-
+                <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-white/6 flex items-center justify-center text-xs font-bold text-slate-300">
 function Builder({ setCurrentPage, isPro }) {
   const [selectedStep, setSelectedStep] = useState("");
 
   return (
-    <motion.div
+                  className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${step.gradient} flex items-center justify-center text-2xl mb-5 shadow-lg text-white`}
       className="min-h-screen bg-gradient-to-br from-violet-50 via-pink-50/40 to-violet-100 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900 transition-all duration-300"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -86,16 +83,16 @@ function Builder({ setCurrentPage, isPro }) {
 
       <div className="px-4 sm:px-10 py-10">
         <motion.div
-          className="text-center mb-12"
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+                    <span className="inline-block px-2 py-1 rounded-full bg-amber-500/80 text-white text-xs font-semibold shadow-sm">
+                      PRO
+                    </span>
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 text-sm font-medium mb-4">
-            Workspace
+                <h3 className="text-lg font-semibold text-white mb-2 leading-tight">
           </span>
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-3">
-            CareerForge{" "}
+                <p className="text-sm text-slate-300 leading-relaxed">
             <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
               Workspace
             </span>
@@ -159,14 +156,14 @@ function Builder({ setCurrentPage, isPro }) {
 
         {selectedStep && (
           <motion.div
-            className="mt-10 max-w-7xl mx-auto bg-white/90 dark:bg-gray-800/90 rounded-3xl p-8 shadow-xl backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50"
+            className="mt-10 max-w-7xl mx-auto bg-white/5 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold mb-2 text-white">
               {selectedStep}
             </h2>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-slate-300">
               This feature is coming soon. Stay tuned! 🚀
             </p>
           </motion.div>
