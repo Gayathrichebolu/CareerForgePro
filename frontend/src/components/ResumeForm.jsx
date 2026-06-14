@@ -467,7 +467,10 @@ function ResumeForm({
       const improved = data.choices[0].message.content.trim();
       setResumeData({ ...resumeData, [fieldName]: improved });
     } catch (err) {
-      alert("AI optimization failed. Please verify your VITE_GROQ_API_KEY.");
+      alert(
+        "AI optimization failed. Please verify your VITE_GROQ_API_KEY.",
+        err,
+      );
     } finally {
       setImprovingField(null);
     }
@@ -509,6 +512,7 @@ function ResumeForm({
     } catch (err) {
       alert(
         "Parser failed to parse text elements. Check api payload or env string.",
+        err,
       );
     } finally {
       setExtracting(false);
