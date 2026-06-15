@@ -535,10 +535,6 @@ function ResumeForm({
 
       <div className="space-y-4">
         {mode === "improve" && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5 space-y-3"
           <div className="space-y-3">
             <div className="rounded-3xl border border-slate-200/70 dark:border-slate-700/50 bg-slate-50/80 dark:bg-slate-900/20 p-5 shadow-sm">
               <p className="text-sm text-gray-700 dark:text-gray-200 mb-3">
@@ -584,7 +580,7 @@ function ResumeForm({
                 ) : extracted ? (
                   "✅ Improved! Paste again to re-improve"
                 ) : (
-                    "✨ Professionally Improve Resume"
+                  "✨ Professionally Improve Resume"
                 )}
               </button>
             </div>
@@ -608,73 +604,24 @@ function ResumeForm({
             onChange={handleChange}
             className={inputClass}
           >
-            <p className="text-xs font-medium text-indigo-300 leading-relaxed flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 shrink-0" /> Copilot Text Extractor
-              Terminal
+            <option value="template1">Classic Left-Align Minimal</option>
+            <option value="template2">Split Minimal Sidebar</option>
+            <option value="template3">Modern Glass Centered Card</option>
+            <option value="template4">Premium Executive Suite 👑</option>
+          </select>
+          {!isPro && resumeData.template === "template4" && (
+            <p className="text-[11px] text-amber-400/90 mt-1.5 font-medium flex items-center gap-1">
+              <span>
+                ⚡ Preview allowed, compilation download triggers Pro.
+              </span>
             </p>
-            <textarea
-              rows="5"
-              placeholder="Drop or paste your existing legacy resume plain text copy here..."
-              value={pastedResume}
-              onChange={(e) => setPastedResume(e.target.value)}
-              className={`${textareaClass} bg-slate-950/80`}
-            />
-            <button
-              type="button"
-              onClick={handleImproveResume}
-              disabled={extracting}
-              className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-95 text-white px-4 py-2.5 text-xs font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {extracting ? (
-                <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  Analyzing Structural Matrix Logs...
-                </>
-              ) : extracted ? (
-                <>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  Fields Optimized! Rewrite to append more
-                </>
-              ) : (
-                <>
-                  <Wand2 className="w-3.5 h-3.5" /> Inject & Auto-Fill Matrix
-                </>
-              )}
-            </button>
-          </motion.div>
-        )}
+          )}
+        </div>
 
-        {/* Template Engine Dropdown */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest flex items-center justify-between">
-              <span>Layout Framework</span>
-              {isPro && (
-                <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-500/10 border border-amber-500/20 text-amber-400 font-black flex items-center gap-0.5">
-                  <Crown className="w-2.5 h-2.5" /> PRO USER
-                </span>
-              )}
-            </label>
-            <select
-              name="template"
-              value={resumeData.template}
-              onChange={handleChange}
-              className={inputClass}
-            >
-              <option value="template1">Classic Left-Align Minimal</option>
-              <option value="template2">Split Minimal Sidebar</option>
-              <option value="template3">Modern Glass Centered Card</option>
-              <option value="template4">Premium Executive Suite 👑</option>
-            </select>
-            {!isPro && resumeData.template === "template4" && (
-              <p className="text-[11px] text-amber-400/90 mt-1.5 font-medium flex items-center gap-1">
-                <span>
-                  ⚡ Preview allowed, compilation download triggers Pro.
-                </span>
-              </p>
-            )}
-          </div>
-
+        <div>
+          <label className="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">
+            Profile Picture
+          </label>
           <input
             type="file"
             accept="image/*"

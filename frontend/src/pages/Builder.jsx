@@ -199,7 +199,6 @@ import {
   BarChart3,
   Mail,
   Star,
-  LayoutDashboard,
   Lock,
 } from "lucide-react";
 

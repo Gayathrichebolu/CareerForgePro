@@ -1,4 +1,4 @@
-// import { motion } from 'framer-motion';
+﻿// import { motion } from 'framer-motion';
 // import Navbar from "../components/Navbar";
 
 // function Home({ setCurrentPage, isPro }) {
@@ -573,7 +573,7 @@
 // export default Home;
 
 import { motion } from "framer-motion";
-﻿import { motion } from 'framer-motion';
+
 import Navbar from '../components/Navbar';
 
 function Home({ setCurrentPage, isPro }) {
