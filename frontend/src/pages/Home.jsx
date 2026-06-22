@@ -534,6 +534,7 @@
 // }
 
 // export default Home;
+﻿
 
 // import React from "react";
 // import { motion } from "framer-motion";
@@ -1061,9 +1062,8 @@ function Home({ setCurrentPage, isPro }) {
       <main className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 flex flex-col gap-16 mt-6 sm:mt-12 shrink-0">
         {}
         {/* Hero Section */}
-        <section className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 shrink-0">
-          {/* Left Column Text details */}
-          <div className="flex-1 space-y-6 sm:space-y-8 text-left shrink-0">
+        <section className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-center px-5 py-16 sm:px-10 sm:py-20 lg:px-16">
+          <div className="max-w-2xl">
             <motion.div
               className="inline-flex items-center gap-2 rounded-full bg-white/95 dark:bg-slate-900/80 px-4.5 py-2 border border-violet-200/80 dark:border-slate-800 shadow-sm shrink-0"
               initial={{ y: 20, opacity: 0 }}
@@ -1216,6 +1216,7 @@ function Home({ setCurrentPage, isPro }) {
       </main>
     </motion.div>
   );
-}
 
+}
 export default Home;
+
